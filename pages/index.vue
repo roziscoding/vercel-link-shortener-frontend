@@ -133,6 +133,11 @@ export default {
     getIcon(shortcode, raw) {
       return this.copied.includes(shortcode) ? 'mdi-check' : 'mdi-content-copy'
     }
+  },
+  head () {
+    return {
+      title: 'roz.ninja - Painel Admin'
+    }
   }
 }
 </script>

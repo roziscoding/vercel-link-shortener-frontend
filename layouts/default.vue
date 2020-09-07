@@ -31,7 +31,7 @@
 <script>
 export default {
   data: () => ({
-    title: 'Admin Panel'
+    title: 'roz.ninja'
   }),
   methods: {
     logout() {

@@ -44,6 +44,11 @@ export default {
       const user = jwt.decode(token)
       this.$auth.setUser(user)
     }
+  },
+  head () {
+    return {
+      title: 'roz.ninja - Login'
+    }
   }
 }
 </script>
