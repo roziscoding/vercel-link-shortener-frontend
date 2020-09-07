@@ -8,15 +8,22 @@
       justify="center"
       class="fullheight"
     >
-      <v-col cols="4">
+      <v-col cols="2">
         <v-card>
           <v-card-title>Login</v-card-title>
           <v-card-text>
-            <vue-telegram-login
-              mode="callback"
-              telegram-login="rozninjabot"
-              @callback="login"
-            />
+            <v-container>
+              <v-row
+                align="center"
+                justify="center"
+              >
+                <vue-telegram-login
+                  mode="callback"
+                  telegram-login="rozninjabot"
+                  @callback="login"
+                />
+              </v-row>
+            </v-container>
           </v-card-text>
         </v-card>
       </v-col>
