@@ -5,8 +5,11 @@
     </h1>
     <h1 v-else>
       {{ otherError }}
+      {{ error }}
     </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
+    <NuxtLink to="/">
+      Home page
+    </NuxtLink>
   </v-app>
 </template>
 

@@ -87,14 +87,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import ConfirmButton from '~/components/ConfirmButton'
 import HomeSpeedDial from '~/fragments/HomeSpeedDial'
 import CreateLinkDialog from '~/fragments/CreateLinkDialog'
-
-const api = axios.create({
-  baseURL: 'https://roz.ninja/api/'
-})
 
 export default {
   components: {
@@ -115,13 +110,13 @@ export default {
     fetchLinks() {
       this.loading = true
 
-      api.get('/links').then(({ data }) => {
+      this.$axios.get('/links').then(({ data }) => {
         this.links = data
         this.loading = false
       })
     },
     async removeLink(shortcode) {
-      await api.delete(`/links/${shortcode}`)
+      await this.$axios.delete(`/links/${shortcode}`)
       this.fetchLinks()
     },
     copy(shortcode, raw = false) {

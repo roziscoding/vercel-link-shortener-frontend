@@ -13,9 +13,9 @@
           <v-card-title>Login</v-card-title>
           <v-card-text>
             <vue-telegram-login
-              mode="redirect"
+              mode="callback"
               telegram-login="rozninjabot"
-              redirect-url="https://roz.ninja/api/login"
+              @callback="login"
             />
           </v-card-text>
         </v-card>
@@ -25,13 +25,26 @@
 </template>
 
 <script>
+import jwt from 'jsonwebtoken'
 import {vueTelegramLogin} from 'vue-telegram-login'
 
 export default {
   components: {
     vueTelegramLogin
   },
-  layout: 'blank'
+  layout: 'blank',
+  methods: {
+    async login (authData) {
+      const { token } = await this.$axios.post('/login', authData).then(response => response.data)
+      const bearerToken = `Bearer ${token}`
+      this.$auth.setToken('local', bearerToken)
+      this.$axios.setHeader('Authorization', bearerToken)
+      this.$auth.ctx.app.$axios.setHeader('Authorization', bearerToken)
+
+      const user = jwt.decode(token)
+      this.$auth.setUser(user)
+    }
+  }
 }
 </script>
 

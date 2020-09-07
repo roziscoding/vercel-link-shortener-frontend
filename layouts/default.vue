@@ -5,6 +5,14 @@
       app
     >
       <v-toolbar-title v-text="title" />
+      <v-spacer />
+      <v-btn
+        text
+        color="error"
+        @click="logout"
+      >
+        Logout
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -24,6 +32,13 @@
 export default {
   data: () => ({
     title: 'Admin Panel'
-  })
+  }),
+  methods: {
+    logout() {
+      this.$auth.logout().then(() => {
+        this.$router.push('/login')
+      })
+    }
+  }
 }
 </script>
