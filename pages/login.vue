@@ -36,10 +36,9 @@ export default {
   methods: {
     async login (authData) {
       const { token } = await this.$axios.post('/login', authData).then(response => response.data)
-      const bearerToken = `Bearer ${token}`
-      this.$auth.setToken('local', bearerToken)
-      this.$axios.setHeader('Authorization', bearerToken)
-      this.$auth.ctx.app.$axios.setHeader('Authorization', bearerToken)
+      this.$auth.setToken('local', token)
+      this.$axios.setHeader('Authorization', `Bearer ${token}`)
+      this.$auth.ctx.app.$axios.setHeader('Authorization', `Bearer ${token}`)
 
       const user = jwt.decode(token)
       this.$auth.setUser(user)

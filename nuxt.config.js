@@ -91,6 +91,11 @@ export default {
     transpile: ['@nuxtjs/auth']
   },
   auth: {
+    token: {
+      name: 'user'
+    },
+    tokenRequired: true,
+    tokenType: 'bearer',
     localStorage: true,
     cookie: false,
     strategies: {
@@ -98,7 +103,7 @@ export default {
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: false,
-          user: { url: '/user', method: 'get', propertyName: false }
+          user: false
         }
       }
     }
