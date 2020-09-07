@@ -1,0 +1,10 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "parser": "typescript",
+  "trailingComma": "none",
+  "vueIndentScriptAndStyle": true,
+  "printWidth": 100
+}
