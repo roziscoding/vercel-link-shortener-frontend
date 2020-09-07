@@ -97,6 +97,7 @@ export default {
     HomeSpeedDial,
     CreateLinkDialog
   },
+  middleware: 'auth',
   data: () => ({
     links: [],
     loading: true,
