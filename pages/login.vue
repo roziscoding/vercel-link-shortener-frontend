@@ -10,7 +10,6 @@
     >
       <v-col cols="2">
         <v-card>
-          <v-card-title>Login</v-card-title>
           <v-card-text>
             <v-container>
               <v-row
@@ -63,5 +62,13 @@ export default {
 <style scoped>
 .fullheight {
   height: 100%;
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
 }
 </style>
