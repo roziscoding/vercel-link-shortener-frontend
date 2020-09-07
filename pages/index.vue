@@ -136,7 +136,7 @@ export default {
   },
   head () {
     return {
-      title: 'roz.ninja - Painel Admin'
+      title: 'Painel Admin'
     }
   }
 }

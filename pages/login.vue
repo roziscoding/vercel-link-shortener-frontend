@@ -54,7 +54,7 @@ export default {
   },
   head () {
     return {
-      title: 'roz.ninja - Login'
+      title: 'Login'
     }
   }
 }
