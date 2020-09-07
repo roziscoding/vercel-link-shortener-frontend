@@ -92,7 +92,7 @@ export default {
   },
   auth: {
     token: {
-      name: 'user'
+      prefix: 'user'
     },
     tokenRequired: true,
     tokenType: 'bearer',
