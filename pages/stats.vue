@@ -163,6 +163,7 @@
         this.loading = false
       },
       async fetchStats(axios) {
+        this.loading = true
         return axios
           .get('/stats', { params: { shortcode: this.shortcode } })
           .then(response => response.data)
