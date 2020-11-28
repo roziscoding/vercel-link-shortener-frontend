@@ -66,12 +66,18 @@
     middleware: 'auth',
     data: () => ({
       links: [],
-      loading: false,
+      loading: true,
       creating: false,
       copied: []
     }),
     mounted() {
-      this.fetchLinks()
+      if (this.loading) this.fetchLinks()
+    },
+    async asyncData({ app }) {
+      return app.$axios
+        .get('/links')
+        .then(response => response.data)
+        .then(links => ({ links, loading: false }))
     },
     methods: {
       fetchLinks() {

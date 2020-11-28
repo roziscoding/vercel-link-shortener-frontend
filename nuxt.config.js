@@ -2,15 +2,14 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: 'spa',
-  /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
   target: 'server',
+  loading: {
+    color: colors.blue.darken2,
+    continuous: true
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -37,7 +36,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~/plugins/telegram.client.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
