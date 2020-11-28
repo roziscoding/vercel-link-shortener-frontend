@@ -162,9 +162,9 @@
         this.dateData = dateData
         this.loading = false
       },
-      async fetchStats(axios) {
+      async fetchStats(axios = this.$axios) {
         this.loading = true
-        return axios
+        await axios
           .get('/stats', { params: { shortcode: this.shortcode } })
           .then(response => response.data)
           .then(prepareChartData)
