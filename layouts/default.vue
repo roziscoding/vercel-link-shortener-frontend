@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar fixed app>
-      <v-toolbar-title to="/" v-text="title" />
+      <nuxt-link to="/"><v-toolbar-title v-text="title" /></nuxt-link>
       <v-spacer />
       <v-btn text color="error" @click="logout"> Logout </v-btn>
     </v-app-bar>
