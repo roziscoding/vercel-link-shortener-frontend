@@ -90,6 +90,47 @@
     return colors[color].base
   }
 
+  const prepareChartData = ({ countries, refs, days }) => {
+    const countryData = {
+      labels: countries.map(({ _id }) => _id),
+      datasets: [
+        {
+          label: 'Visits',
+          backgroundColor: new Array(countries.length).fill().map(() => getRandomColor()),
+          data: countries.map(({ count }) => count)
+        }
+      ]
+    }
+
+    const refData = {
+      labels: refs.map(({ _id }) => _id || 'No Ref'),
+      datasets: [
+        {
+          label: 'Visits',
+          backgroundColor: new Array(refs.length).fill().map(() => getRandomColor()),
+          data: refs.map(({ count }) => count)
+        }
+      ]
+    }
+
+    const dateData = {
+      labels: days.map(({ _id }) => _id.split('-').reverse().join('/')),
+      datasets: [
+        {
+          label: 'Visits',
+          backgroundColor: getRandomColor(),
+          data: days.map(({ count }) => count)
+        }
+      ]
+    }
+
+    return {
+      countryData,
+      refData,
+      dateData
+    }
+  }
+
   export default {
     middleware: 'auth',
     components: {
@@ -104,50 +145,29 @@
       colors
     }),
     async mounted() {
-      this.fetchStats()
+      if (this.loading) this.fetchStats()
+    },
+    watchQuery: ['shortcode'],
+    async asyncData({ route, app }) {
+      return app.$axios
+        .get('/stats', { params: { shortcode: route.query.shortcode } })
+        .then(response => response.data)
+        .then(prepareChartData)
+        .then(data => ({ ...data, loading: false }))
     },
     methods: {
-      async fetchStats() {
-        this.loading = true
-        await this.$axios
+      setData({ countryData, refData, dateData }) {
+        this.countryData = countryData
+        this.refData = refData
+        this.dateData = dateData
+        this.loading = false
+      },
+      async fetchStats(axios) {
+        return axios
           .get('/stats', { params: { shortcode: this.shortcode } })
           .then(response => response.data)
-          .then(({ countries, refs, days }) => {
-            this.countryData = {
-              labels: countries.map(({ _id }) => _id),
-              datasets: [
-                {
-                  label: 'Visits',
-                  backgroundColor: new Array(countries.length).fill().map(() => getRandomColor()),
-                  data: countries.map(({ count }) => count)
-                }
-              ]
-            }
-
-            this.refData = {
-              labels: refs.map(({ _id }) => _id || 'No Ref'),
-              datasets: [
-                {
-                  label: 'Visits',
-                  backgroundColor: new Array(refs.length).fill().map(() => getRandomColor()),
-                  data: refs.map(({ count }) => count)
-                }
-              ]
-            }
-
-            this.dateData = {
-              labels: days.map(({ _id }) => _id.split('-').reverse().join('/')),
-              datasets: [
-                {
-                  label: 'Visits',
-                  backgroundColor: getRandomColor(),
-                  data: days.map(({ count }) => count)
-                }
-              ]
-            }
-          })
-
-        this.loading = false
+          .then(prepareChartData)
+          .then(this.setData.bind(this))
       }
     },
     head() {
