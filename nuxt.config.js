@@ -10,6 +10,11 @@ export default {
     color: colors.blue.darken2,
     continuous: true
   },
+  loadingIndicator: {
+    name: 'circle',
+    color: colors.shades.white,
+    background: colors.grey.darken4
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head

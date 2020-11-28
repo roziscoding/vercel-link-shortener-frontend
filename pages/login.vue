@@ -7,17 +7,16 @@
             <v-container>
               <v-row align="center" justify="center">
                 <client-only>
-                  <v-skeleton-loader
-                    type="list-item-avatar"
-                    width="280"
-                    slot="placeholder"
-                    class=""
-                  ></v-skeleton-loader>
                   <vue-telegram-login
                     mode="callback"
                     telegram-login="rozninjabot"
                     @callback="login"
                   />
+                  <v-skeleton-loader
+                    type="avatar, text"
+                    width="280"
+                    slot="placeholder"
+                  ></v-skeleton-loader>
                 </client-only>
               </v-row>
             </v-container>
