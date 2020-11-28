@@ -91,6 +91,7 @@
   }
 
   export default {
+    middleware: 'auth',
     components: {
       PolarAreaChart,
       LineChart
