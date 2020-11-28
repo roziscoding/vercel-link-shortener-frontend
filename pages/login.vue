@@ -11,6 +11,7 @@
                     type="list-item-avatar"
                     width="280"
                     slot="placeholder"
+                    class=""
                   ></v-skeleton-loader>
                   <vue-telegram-login
                     mode="callback"
