@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.vercel_shortener_admin",
+      "sha256_cert_fingerprints": [
+        "AB:F3:C3:41:8F:3E:0C:93:D3:AD:8A:22:B4:16:57:BF:B1:59:93:5E:AB:93:F4:90:54:01:4E:C1:27:A0:B9:E9"
+      ]
+    }
+  }
+]
