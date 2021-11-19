@@ -15,6 +15,11 @@
 
 <script>
 export default {
+  mounted() {
+    if (!this.$route.query.token) {
+      return this.$router.push('/login?deeplink=true')
+    }
+  },
   computed: {
     url (){
       return `/authSuccess?token=${this.$route.query.token}`

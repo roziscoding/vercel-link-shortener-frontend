@@ -47,6 +47,11 @@
     methods: {
       async login(authData) {
         const { token } = await this.$axios.post('/login', authData).then(response => response.data)
+
+        if (this.deeplink) {
+          return this.$router.push(`/authSuccess?token=${token}`)
+        }
+
         const bearerToken = `Bearer ${token}`
         this.$auth.setToken('local', bearerToken)
         this.$axios.setHeader('Authorization', bearerToken)
@@ -54,10 +59,6 @@
 
         const user = jwt.decode(token)
         this.$auth.setUser(user)
-
-        if (this.deeplink) {
-          this.$router.push(`/authSuccess?token=${token}`)
-        }
       }
     },
     head() {
