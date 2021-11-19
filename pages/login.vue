@@ -8,8 +8,9 @@
               <v-row align="center" justify="center">
                 <client-only>
                   <vue-telegram-login
-                    mode="callback"
+                    :mode="loginMode"
                     telegram-login="rozninjabot"
+                    redirect-url="roziscodinglink://login.roz.ninja"
                     @callback="login"
                   />
                   <v-skeleton-loader
@@ -32,6 +33,11 @@
 
   export default {
     layout: 'blank',
+    computed: {
+      loginMode () {
+        return this.$route.query.mode || 'callback'
+      }
+    },
     methods: {
       async login(authData) {
         const { token } = await this.$axios.post('/login', authData).then(response => response.data)
