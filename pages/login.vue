@@ -39,6 +39,9 @@
       },
       redirectUrl () {
         return this.$route.query.redirect || ''
+      },
+      deeplink () {
+        return !!this.$route.query.deeplink
       }
     },
     methods: {
@@ -51,6 +54,10 @@
 
         const user = jwt.decode(token)
         this.$auth.setUser(user)
+
+        if (this.deeplink) {
+          this.$router.push(`/authSuccess?token=${token}`)
+        }
       }
     },
     head() {
