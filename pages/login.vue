@@ -49,7 +49,7 @@
         const { token } = await this.$axios.post('/login', authData).then(response => response.data)
 
         if (this.deeplink) {
-          return this.$router.push(`/authSuccess?token=${token}`)
+          return this.$router.push(`/deeplink?token=${token}`)
         }
 
         const bearerToken = `Bearer ${token}`
