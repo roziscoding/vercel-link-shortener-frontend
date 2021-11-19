@@ -10,7 +10,7 @@
                   <vue-telegram-login
                     :mode="loginMode"
                     telegram-login="rozninjabot"
-                    redirect-url="roziscodinglink://login.roz.ninja"
+                    :redirect-url="redirectUrl"
                     @callback="login"
                   />
                   <v-skeleton-loader
@@ -35,7 +35,10 @@
     layout: 'blank',
     computed: {
       loginMode () {
-        return this.$route.query.mode || 'callback'
+        return this.$route.query.redirect ? 'redirect' : 'callback'
+      },
+      redirectUrl () {
+        return this.$route.query.redirect || ''
       }
     },
     methods: {
