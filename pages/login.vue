@@ -29,56 +29,58 @@
 </template>
 
 <script>
-  import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
-  export default {
-    layout: 'blank',
-    computed: {
-      loginMode () {
-        return this.$route.query.redirect ? 'redirect' : 'callback'
-      },
-      redirectUrl () {
-        return this.$route.query.redirect || ''
-      },
-      deeplink () {
-        return !!this.$route.query.deeplink
-      }
+export default {
+  layout: 'blank',
+  computed: {
+    loginMode() {
+      return this.$route.query.redirect ? 'redirect' : 'callback'
     },
-    methods: {
-      async login(authData) {
-        const { token } = await this.$axios.post('/login', authData).then(response => response.data)
-
-        if (this.deeplink) {
-          return this.$router.push(`/deeplink?token=${token}`)
-        }
-
-        const bearerToken = `Bearer ${token}`
-        this.$auth.setToken('local', bearerToken)
-        this.$axios.setHeader('Authorization', bearerToken)
-        this.$auth.ctx.app.$axios.setHeader('Authorization', bearerToken)
-
-        const user = jwt.decode(token)
-        this.$auth.setUser(user)
-      }
+    redirectUrl() {
+      return this.$route.query.redirect || ''
     },
-    head() {
-      return {
-        title: 'Login'
+    deeplink() {
+      return !!this.$route.query.deeplink
+    }
+  },
+  methods: {
+    async login(authData) {
+      const { token } = await this.$axios
+        .post('/login', authData, { params: { lifetime: this.deeplink } })
+        .then(response => response.data)
+
+      if (this.deeplink) {
+        return this.$router.push(`/deeplink?token=${token}`)
       }
+
+      const bearerToken = `Bearer ${token}`
+      this.$auth.setToken('local', bearerToken)
+      this.$axios.setHeader('Authorization', bearerToken)
+      this.$auth.ctx.app.$axios.setHeader('Authorization', bearerToken)
+
+      const user = jwt.decode(token)
+      this.$auth.setUser(user)
+    }
+  },
+  head() {
+    return {
+      title: 'Login'
     }
   }
+}
 </script>
 
 <style scoped>
-  .fullheight {
-    height: 100%;
-  }
+.fullheight {
+  height: 100%;
+}
 
-  .fullwidth {
-    width: 100%;
-  }
+.fullwidth {
+  width: 100%;
+}
 
-  .center {
-    text-align: center;
-  }
+.center {
+  text-align: center;
+}
 </style>
