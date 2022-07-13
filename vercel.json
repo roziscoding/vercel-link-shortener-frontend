@@ -1,19 +1,29 @@
 {
+  "rewrites": [
+    {
+      "source": "/",
+      "has": {
+        "type": "host",
+        "value": "roz.ninja"
+      },
+      "destination": "/api/shortener"
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"
     },
     {
-      "src": "/api/links/(.*)",
-      "dest": "/api/links?shortcode=$1"
+      "source": "/api/links/(.*)",
+      "destination": "/api/links?shortcode=$1"
     },
     {
-      "src": "/bot/(.+)",
-      "dest": "/api/bot?token=$1"
+      "source": "/bot/(.+)",
+      "destination": "/api/bot?token=$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/shortener?shortcode=$1"
+      "source": "/(.*)",
+      "destination": "/api/shortener?shortcode=$1"
     }
   ]
 }
