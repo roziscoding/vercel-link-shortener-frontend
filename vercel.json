@@ -1,5 +1,5 @@
 {
-  "rewrites": [
+  "routes": [
     {
       "src": "/",
       "has": [
@@ -9,9 +9,7 @@
         }
       ],
       "dest": "/api/shortener"
-    }
-  ],
-  "routes": [
+    },
     {
       "handle": "filesystem"
     },
