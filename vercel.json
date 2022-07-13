@@ -2,10 +2,12 @@
   "rewrites": [
     {
       "source": "/",
-      "has": {
-        "type": "host",
-        "value": "roz.ninja"
-      },
+      "has": [
+        {
+          "type": "host",
+          "value": "roz.ninja"
+        }
+      ],
       "destination": "/api/shortener"
     }
   ],
