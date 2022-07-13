@@ -11,6 +11,16 @@
       "destination": "/api/shortener"
     },
     {
+      "source": "/login",
+      "has": [
+        {
+          "type": "host",
+          "value": "roz.ninja"
+        }
+      ],
+      "destination": "/api/shortener"
+    },
+    {
       "source": "/api/links/(.*)",
       "destination": "/api/links?shortcode=$1"
     },
