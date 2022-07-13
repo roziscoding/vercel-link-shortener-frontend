@@ -64,7 +64,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://roz.ninja/api/'
+    baseURL: 'api/'
   },
   /*
    ** vuetify module configuration
